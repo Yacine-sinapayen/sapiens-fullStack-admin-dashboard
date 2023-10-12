@@ -43,7 +43,7 @@ const navItems = [
   },
   {
     text: "Menu client",
-  
+
     icon: null,
   },
   {
@@ -109,6 +109,7 @@ const navItems = [
 ];
 
 const Sidebar = ({
+  user,
   isNonMobile,
   drawerWidth,
   isSidebarOpen,
@@ -144,7 +145,7 @@ const Sidebar = ({
           }}
         >
           <Box width="100%">
-            <Box m="1.5rem 2rem 2rem 3rem">
+            <Box m="1.5rem 2rem 1rem 2rem">
               <FlexBetween color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap="0.5rem">
                   <Typography variant="h4" fontWeight="bold">
@@ -164,7 +165,7 @@ const Sidebar = ({
               {navItems.map(({ text, name, icon }) => {
                 if (!icon) {
                   return (
-                    <Typography key={text} sx={{ m: "2.25rem 0 1rem 3rem" }}>
+                    <Typography key={text} sx={{ m: "1rem 0 0.5rem 1rem" }}>
                       {text}
                     </Typography>
                   );
@@ -181,7 +182,9 @@ const Sidebar = ({
                       }}
                       sx={{
                         backgroundColor:
-                          active === lcText ? theme.palette.secondary[300]: "transparent",
+                          active === lcText
+                            ? theme.palette.secondary[300]
+                            : "transparent",
                         color:
                           active === lcText
                             ? theme.palette.primary[600]
@@ -190,7 +193,6 @@ const Sidebar = ({
                     >
                       <ListItemIcon
                         sx={{
-                          ml: "1rem",
                           color:
                             active === lcText
                               ? theme.palette.primary[600]
@@ -208,6 +210,43 @@ const Sidebar = ({
                 );
               })}
             </List>
+          </Box>
+
+          {/* FOOTER SIDEBAR */}
+          <Box>
+            <Divider />
+            <FlexBetween textTransform="none" gap="1rem" m="1rem 2rem 0 3rem">
+              <Box
+                component="img"
+                alt="profile"
+                src={profileImage}
+                height="40px"
+                width="40px"
+                borderRadius="50%"
+                sx={{ objectFit: "cover" }}
+              />
+              <Box textAlign="left">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="0.9rem"
+                  sx={{ color: theme.palette.secondary[100] }}
+                >
+                  {user.name}
+                </Typography>
+                <Typography
+                  fontSize="0.8rem"
+                  sx={{ color: theme.palette.secondary[200] }}
+                >
+                  {user.occupation}
+                </Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{
+                  color: theme.palette.secondary[300],
+                  fontSize: "25px ",
+                }}
+              />
+            </FlexBetween>
           </Box>
         </Drawer>
       )}
